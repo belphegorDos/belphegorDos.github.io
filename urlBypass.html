@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search URL</title>
+
+    <style>
+        body {
+            background-color: black;
+        }
+        
+    </style>
+</head>
+<body>
+
+    <input type="text" id="searchInput" placeholder="Type something...">
+    <button onclick="addQuery()">Search</button>
+
+    <script>
+        let count = 1;
+
+        function addQuery() {
+            const input = document.getElementById("searchInput").value;
+            const encoded = encodeURIComponent(input);
+
+            // Get current URL params
+            const params = new URLSearchParams(window.location.search);
+
+            // Add new query instead of replacing
+            params.append("q" + count, input);
+
+            count++;
+
+            // Update URL without reload
+            history.pushState({}, "", "?" + params.toString());
+        }
+    </script>
+
+</body>
+</html>
