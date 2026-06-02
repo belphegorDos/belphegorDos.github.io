@@ -27,6 +27,10 @@ function showQueries() {
 
 }
 
-function showUrl() {
-    alert(window.location.href);
+async function showUrl() {
+    try {
+        await navigator.clipboard.writeText(window.location.href);
+    } catch (error) {
+        alert('failed to copy URL');
+    }
 }
