@@ -17,7 +17,6 @@ function addQuery() {
 function showQueries() {
   const div = document.getElementById("queryList");
 
-    // Remove existing paragraphs AND existing horizontal rules
     const existingP = div.querySelectorAll("p");
     existingP.forEach(p => p.remove());
     
@@ -31,7 +30,6 @@ function showQueries() {
         p.textContent = query;
         div.appendChild(p);
 
-        // 2. Only add an <hr> if it is NOT the last item in the array
         if (index < queries.length - 1) {
             const hr = document.createElement("hr");
             div.appendChild(hr);
