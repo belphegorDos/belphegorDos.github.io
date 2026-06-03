@@ -1,23 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <link href="style.css" rel="stylesheet">
-    <script src="script.js"></script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search URL</title>
-</head>
-<body>
 
-    <input type="text" id="searchInput" placeholder="Type something...">
-    <button onclick="addQuery()">Search</button>
-    <button onclick="window.location.href='https://belphegordos.github.io/'">Reload</button>
-    <button onclick="showUrl()">URL</button>
-    <div id="queryList" class="classicText">
-        <button onclick="showQueries()">
-            click to show queries
-        </button>
-    </div>
+	<head>
+			<link href="style.css" rel="stylesheet">
+			<meta charset="UTF-8">
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+			<title>Search URL</title>
+			<script src="script.js"></script>
+	</head>
 
-</body>
+	<body>
+			
+			<div id="urlEdit">
+			
+				<div id="urlStart">
+				
+					<input type="text" id="searchInput" placeholder="Type something...">
+					<button onclick="addQuery()">Search</button>
+					<button onclick="window.location.href='https://belphegordos.github.io/'">Reload</button>
+					<button onclick="showUrl()">URL</button>
+					
+				</div>
+				
+				<div id="urlMenu">
+				
+					<label style="color: white;" for="query">URL list visibility:</label>
+					
+					<select name="query" id="queryToggle" onchange="toggleVisible()">
+						<option value="Hide">Hide</option>
+						<option value="Show">Show</option>
+					</select>
+					
+				</div>
+				
+				<div id="queryList" style="display: none;"></div>
+								
+			</div>
+			
+	</body>
+
 </html>

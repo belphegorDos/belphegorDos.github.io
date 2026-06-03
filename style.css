@@ -1,6 +1,12 @@
 body {
     background-color: black;
 }
-.classicText {
-    color: red;
+#queryList p {
+	color: white;
+	line-height: 0px;
+	margin-top: 10px;
+	margin-bottom: 15px;
+}
+#queryList {
+	border: solid 2px white;
 }
