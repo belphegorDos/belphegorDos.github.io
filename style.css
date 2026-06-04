@@ -1,12 +1,31 @@
 body {
     background-color: black;
 }
-#queryList p {
+select:focus {
+    outline: none;
+    box-shadow: none;
+}
+#queryList button {
+	margin-top: 0px;
+	margin-bottom: 0px;
+	width: 100%;
+	text-align: left;
+	background-color: black;
 	color: white;
-	line-height: 0px;
-	margin-top: 10px;
-	margin-bottom: 15px;
+	border: none;
+	box-shadow: none;
+}
+#queryList button:hover {
+	color: red;
+	text-decoration: underline;
+	text-decoration-color: red;
 }
 #queryList {
-	border: solid 2px white;
+	max-height: 250px;
+	overflow-y: auto;
+}
+#queryList hr {
+	line-height: 0px;
+	margin-top: 0px;
+	margin-bottom: 0px;
 }
