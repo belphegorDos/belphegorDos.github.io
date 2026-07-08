@@ -1,20 +1,25 @@
 let count = 1;
 let queries = [];
+let names = [];
 
 const url = new URL(window.location);
 const params = new URLSearchParams(window.location.search);
 
 window.onload = function() {
     for (const [name, value] of params) {
-        if (queries.includes(value)) {
+		const query = `${name}=${value}`;
+        if (queries.includes(query)) {
             url.search = "";
             history.replaceState({}, "", url);
             queries = [];
             return;
-        } else {
-            queries.push(value);
-        }
+        } 
+        queries.push(value);
+		names.push(name);
     }
+	console.log('count:', count);
+	console.log('queries:', queries);
+	console.log('names:', names);
     showQueries()
 };
 
