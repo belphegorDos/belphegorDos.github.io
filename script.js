@@ -17,9 +17,6 @@ window.onload = function() {
         queries.push(value);
 		names.push(name);
     }
-	console.log('count:', count);
-	console.log('queries:', queries);
-	console.log('names:', names);
     showQueries()
 };
 
