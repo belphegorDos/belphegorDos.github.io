@@ -89,7 +89,7 @@ function showQueries() {
         div.append(button);
 
         button.onclick = function() {
-			count -= 1;
+			count--;
 			
             const hr = button.nextElementSibling;
 
