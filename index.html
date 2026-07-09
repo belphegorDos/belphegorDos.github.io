@@ -6,7 +6,8 @@
 			<meta charset="UTF-8">
 			<meta name="viewport" content="width=device-width, initial-scale=1.0">
 			<title>Search URL</title>
-			<script src="script.js"></script>
+			<script src="script.js"></script> <!-- ^ urlEdit functionality ^ -->
+			<script src="windowDiv.js"></script> <!-- ^ window a div ^ -->
 	</head>
 
 	<body>
@@ -17,7 +18,7 @@
 				
 					<input type="text" id="searchInput" placeholder="add query">
 					<button onclick="addQuery()">Add</button>
-					<button onclick="reload()">Reload</button>
+					<button onclick="reload()">Clear</button>
 					<button onclick="showUrl()">URL</button>
 					
 				</div>
@@ -34,8 +35,14 @@
 				</div>
 				
 				<div id="queryList" style="display: none;"></div>
-								
+
 			</div>
+
+			<script>
+
+				makeWindow(document.getElementById("urlEdit"), "url edit")
+
+			</script>
 
 	</body>
 

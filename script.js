@@ -1,30 +1,14 @@
-let count = 1;
 let queries = [];
 let names = [];
 
-const url = new URL(window.location);
-const params = new URLSearchParams(window.location.search);
-
 window.onload = function() {
-    for (const [name, value] of params) {
-		const query = `${name}=${value}`;
-        if (queries.includes(query)) {
-            url.search = "";
-            history.replaceState({}, "", url);
-            queries = [];
-            return;
-        } 
-        queries.push(value);
-		names.push(name);
-    }
-    showQueries()
+    fixParam();
+    showQueries();
 };
 
 function removeQueryByValue(valueToRemove) {
     const url = new URL(window.location.href);
     const params = url.searchParams;
-
-    // collect keys to remove (because multiple params can share same value)
     const keysToDelete = [];
 
     for (const [key, value] of params.entries()) {
@@ -33,10 +17,8 @@ function removeQueryByValue(valueToRemove) {
         }
     }
 
-    // remove them
     keysToDelete.forEach(key => params.delete(key));
 
-    // update the URL without reloading the page
     window.history.replaceState({}, "", url);
 }
 
@@ -49,20 +31,23 @@ function removeFromArray(arr, value) {
 }
 
 function addQuery() {
+    const params = new URLSearchParams(window.location.search);
     const input = document.getElementById("searchInput").value;
+
     if (queries.includes(input)) {
         alert("Duplicate entry.");
         return;
+    } else if (names.length > 0) {
+        params.append("q" + String(Number(names[names.length - 1].at(-1))+1), input);
     } else {
-        queries.push(input);
+        params.append("q1", input);
     }
-    const params = new URLSearchParams(window.location.search);
-    params.append("q" + count, input);
 
-    count++;
+    queries.push(input);
+    addName();
 
     history.pushState({}, "", "?" + params.toString());
-	showQueries()
+	showQueries();
 }
 
 function showQueries() {
@@ -88,9 +73,7 @@ function showQueries() {
 
         div.append(button);
 
-        button.onclick = function() {
-			count--;
-			
+        button.onclick = function() {			
             const hr = button.nextElementSibling;
 
             if (hr) {
@@ -98,6 +81,8 @@ function showQueries() {
             } 
             
             this.remove();
+            nameIndex = queries.indexOf(query);
+            removeFromArray(names, names[nameIndex]);
             removeFromArray(queries, query);
 
             if (div.children.length == 0) {
@@ -105,7 +90,6 @@ function showQueries() {
             }
 
             removeQueryByValue(query);
-
         }
 
         if (index < queries.length - 1) {
@@ -132,14 +116,48 @@ function toggleVisible() {
 	const targetDiv = document.getElementById("queryList");
 	
 	if (menu.value === "Show") {
-    targetDiv.style.display = "block";
-  } else {
-    targetDiv.style.display = "none";
-  }
+        targetDiv.style.display = "block";
+    } else {
+        targetDiv.style.display = "none";
+    }
 }
 
 function reload() {
+    const url = new URL(window.location);
     url.search = "";
     history.replaceState({}, "", url);
     window.location.reload();
+}
+
+function addName() {
+    if (names.length != 0) {
+        names.push("q" + String(Number(names[names.length - 1].at(-1))+1));
+    } else {
+        names.push('q1');
+    }
+}
+
+function fixParam() {
+    const params = new URLSearchParams(window.location.search);
+    for (const [name, value] of params) {
+        if (queries.includes(value)) {
+            reload();
+        }
+        queries.push(value);
+		names.push(name);
+    }
+
+    let length = names.length;
+    let param = "?";
+    names = [];
+
+    for (let i = 1; i < length+1; i++) {
+        names.push('q' + i);
+    }
+
+    for (let i = 0; i < length; i++) {
+        param += `${names[i]}=${queries[i]}&`;
+    }
+
+    history.pushState(null, "", param.slice(0, -1));
 }

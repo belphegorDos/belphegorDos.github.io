@@ -20,12 +20,80 @@ select:focus {
 	text-decoration: underline;
 	text-decoration-color: red;
 }
-#queryList {
-	max-height: 250px;
-	overflow-y: auto;
-}
 #queryList hr {
 	line-height: 0px;
 	margin-top: 0px;
 	margin-bottom: 0px;
+}
+.floating-window {
+    position: absolute;
+
+    width: 350px;
+    height: 250px;
+
+    border: 1px solid #555;
+    background: #363636;
+
+    box-shadow: 0 4px 12px rgba(0,0,0,.3);
+
+    display: flex;
+    flex-direction: column;
+
+    overflow: hidden;
+}
+
+.window-title {
+
+    background: #444;
+    color: white;
+
+    padding: 5px 8px;
+
+    cursor: move;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    user-select: none;
+}
+
+.window-title button {
+
+    background: transparent;
+    color: white;
+    border: none;
+
+    cursor: pointer;
+
+    font-size: 14px;
+}
+
+.window-content {
+
+    flex: 1;
+
+    overflow: auto;
+
+    padding: 8px;
+}
+
+.resize-handle {
+
+    width: 14px;
+    height: 14px;
+
+    position: absolute;
+
+    right: 0;
+    bottom: 0;
+
+    cursor: nwse-resize;
+
+    background:
+        linear-gradient(
+            135deg,
+            transparent 50%,
+            #777 50%
+        );
 }
