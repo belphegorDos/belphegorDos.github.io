@@ -2,12 +2,14 @@
 <html lang="en">
 
 	<head>
-			<link href="style.css" rel="stylesheet">
+			<link href="style.css" rel="stylesheet"> <!-- ^ Main + Url ^ -->
+			<link href="calc.css" rel="stylesheet"> <!-- ^ Calc ^ -->
 			<meta charset="UTF-8">
 			<meta name="viewport" content="width=device-width, initial-scale=1.0">
 			<title>Search URL</title>
 			<script src="script.js"></script> <!-- ^ urlEdit functionality ^ -->
 			<script src="windowDiv.js"></script> <!-- ^ window a div ^ -->
+			<script src="calc.js"></script> <!-- ^ calc functionality ^ -->
 	</head>
 
 	<body>
@@ -17,7 +19,7 @@
 				<div id="urlStart">
 				
 					<input type="text" id="searchInput" placeholder="add query">
-					<button onclick="addQuery()">Add</button>
+					<button onclick="addQuery(document.getElementById('searchInput').value)">Add</button>
 					<button onclick="reload()">Clear</button>
 					<button onclick="showUrl()">URL</button>
 					
@@ -38,10 +40,72 @@
 
 			</div>
 
+			<div id="presets">
+
+				<a onclick="addQuery(document.getElementById('preset1').textContent)"><pre id="preset1">https://launchpad.classlink.com/</pre></a>
+				<a onclick="addQuery(document.getElementById('preset2').textContent)"><pre id="preset2">https://myapps.classlink.com/home</pre></a>
+				<a onclick="addQuery(document.getElementById('preset3').textContent)"><pre id="preset3">https://venturaunified.instructure.com/</pre></a>
+				<a onclick="addQuery(document.getElementById('preset4').textContent)"><pre id="preset4">https://venturausd.aeries.net/</pre></a>
+				<a onclick="addQuery(document.getElementById('preset5').textContent)"><pre id="preset5">https://www.deltamath.com/</pre></a>
+
+			</div>
+
+			<div id="calculator">
+				
+				<div id="calcDisplay">
+
+					<p id="display">0</p>
+
+				</div>
+
+				<div id="calcButtons">
+
+					<div id="row1">
+						<button onclick="appendInt(1)">1</button>
+						<button onclick="appendInt(2)">2</button>
+						<button onclick="appendInt(3)">3</button>
+						<button onclick="appendChar('*')">*</button>
+					</div>
+					<div id="row2">
+						<button onclick="appendInt(4)">4</button>
+						<button onclick="appendInt(5)">5</button>
+						<button onclick="appendInt(6)">6</button>
+						<button onclick="appendChar('/')">/</button>
+					</div>
+					<div id="row2">
+						<button onclick="appendInt(7)">7</button>
+						<button onclick="appendInt(8)">8</button>
+						<button onclick="appendInt(9)">9</button>
+						<button onclick="specialOperation('CE')">CE</button>
+					</div>
+
+					<div id="calcOperations">
+
+						<button onclick="appendChar('+')">+</button>
+						<button onclick="appendInt(0)">0</button>
+						<button onclick="appendChar('-')">-</button>
+						<button onclick="specialOperation('=')">=</button>
+					</div>
+
+				</div>
+
+			</div>
+
+			<div id="info">
+				
+				<a href="https://github.com/belphegorDos/belphegorDos.github.io"><pre>Github</pre></a>
+				<a href="https://www.securly.com/site/assets/product-briefs/filter.pdf"><pre>Filter</pre></a>
+				<a href="https://support.securly.com/hc/en-us/articles/27869173702423-Filter-Securly-Filter-Category-Examples"><pre>keyword blacklist 1</pre></a>
+				<a href="https://support.securly.com/hc/en-us/sections/4405534903447-Block-and-Allow-Content"><pre>keyword blacklist 2</pre></a>
+				<a href="https://findmykids.org/blog/en/list-of-keywords-to-block-for-parental-control"><pre>keyword blacklist 3</pre></a>
+
+			</div>
+
 			<script>
-
-				makeWindow(document.getElementById("urlEdit"), "url edit")
-
+				makeWindow(document.getElementById("urlEdit"), "Url Edit", "321", "350", "5", "5", "350", "98")
+				makeWindow(document.getElementById("presets"), "Presets", "321", "350", "5", "331", "350", "98")
+				makeWindow(document.getElementById("calculator"), "Calculator", "321", "364", "360", "5", "364", "321")
+				makeWindow(document.getElementById("info"), "Info - As of 7/11/26", "321", "364", "360", "331", "350", "98")
 			</script>
 
 	</body>

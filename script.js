@@ -30,14 +30,16 @@ function removeFromArray(arr, value) {
     }
 }
 
-function addQuery() {
+function addQuery(input) {
     const params = new URLSearchParams(window.location.search);
-    const input = document.getElementById("searchInput").value;
 
     if (queries.includes(input)) {
         alert("Duplicate entry.");
         return;
-    } else if (names.length > 0) {
+    } else if (input.trim() == "" || input[0] == " ") {
+        alert("invalid entry.");
+        return;
+    }else if (names.length > 0) {
         params.append("q" + String(Number(names[names.length - 1].at(-1))+1), input);
     } else {
         params.append("q1", input);
@@ -160,4 +162,11 @@ function fixParam() {
     }
 
     history.pushState(null, "", param.slice(0, -1));
+}
+async function copy(string) {
+    try {
+        await navigator.clipboard.writeText(string);
+    } catch (error) {
+        alert('failed to copy URL');
+    }
 }

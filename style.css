@@ -97,3 +97,10 @@ select:focus {
             #777 50%
         );
 }
+
+a:visited {
+    color: blue;
+}
+a:hover {
+    color: darkred;
+}

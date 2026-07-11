@@ -1,4 +1,4 @@
-function makeWindow(div, title = div.id || "Window") {
+function makeWindow(div, title = div.id  || "Window", height, width, left, top, minWidth, minHeight) {
     let lastHeight = 0;
 
     const windowDiv = document.createElement("div");
@@ -8,7 +8,7 @@ function makeWindow(div, title = div.id || "Window") {
     titleBar.className = "window-title";
 
     const collapse = document.createElement("button");
-    collapse.textContent = "X";
+    collapse.textContent = "v";
 
     const titleText = document.createElement("span");
     titleText.textContent = title;
@@ -38,12 +38,12 @@ function makeWindow(div, title = div.id || "Window") {
             lastHeight = windowDiv.offsetHeight;
             content.style.display = "none";
             resize.style.display = "none";
-            collapse.textContent = "O";
+            collapse.textContent = ">";
             windowDiv.style.height = "28px";
         } else {
             content.style.display = "";
             resize.style.display = "";
-            collapse.textContent = "X";
+            collapse.textContent = "v";
             windowDiv.style.height = String(lastHeight) + "px";
         }
     };
@@ -92,10 +92,10 @@ function makeWindow(div, title = div.id || "Window") {
         document.onmousemove = e => {
 
             windowDiv.style.width =
-                Math.max(351, startW + e.clientX - startX) + "px";
+                Math.max(minWidth, startW + e.clientX - startX) + "px";
 
             windowDiv.style.height =
-                Math.max(97, startH + e.clientY - startY) + "px";
+                Math.max(minHeight, startH + e.clientY - startY) + "px";
         };
 
         document.onmouseup = () => {
@@ -105,6 +105,8 @@ function makeWindow(div, title = div.id || "Window") {
     };
 
     // Default position
-    windowDiv.style.left = "5px";
-    windowDiv.style.top = "5px";
+    windowDiv.style.left = left + "px";
+    windowDiv.style.top = top + "px";
+    windowDiv.style.height = height + "px";
+    windowDiv.style.width = width + "px";
 }
